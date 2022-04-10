@@ -82,6 +82,7 @@ form button:active {
 #data {
   width: 80vw;
   height: 15vh;
+  min-height: 140px;
   background-color: #fff;
   border-radius: 12px;
   position: relative;
