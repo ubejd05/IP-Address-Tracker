@@ -1,21 +1,29 @@
+const ipAddressDisplay = document.querySelector("#ip");
+const locationDisplay = document.querySelector("#location");
+const timezoneDisplay = document.querySelector("#timezone");
+const ispDisplay = document.querySelector("#isp");
+
+
+const IPapiKey = "at_btHIX6OfI49h7StFhthNkCrSTaNA6";
+const mapboxApiKey = "pk.eyJ1IjoidWJpMTIzIiwiYSI6ImNrbjAzcW1yMDBqeW0ydnBrY3g1bmF4dGQifQ.RzVYxko64eFrxMDequGUlA";
+
+let data;
 let lng;
 let lat;
-let data;
-const apiKey = "at_btHIX6OfI49h7StFhthNkCrSTaNA6";
 
 async function getData() {
-  data = await fetch(
-    "https://geo.ipify.org/api/v2/country,city?apiKey=at_btHIX6OfI49h7StFhthNkCrSTaNA6"
+  let res = await fetch(
+    `https://geo.ipify.org/api/v2/country,city?apiKey=${IPapiKey}`
   );
-  data = await data.json();
+  data = await res.json();
   lng = data.location.lng;
   lat = data.location.lat;
+  populateData();
   renderMap();
 }
 
 function renderMap() {
-  mapboxgl.accessToken =
-    "pk.eyJ1IjoidWJpMTIzIiwiYSI6ImNrbjAzcW1yMDBqeW0ydnBrY3g1bmF4dGQifQ.RzVYxko64eFrxMDequGUlA";
+  mapboxgl.accessToken = mapboxApiKey;
   const map = new mapboxgl.Map({
     container: "map", // container ID
     style: "mapbox://styles/mapbox/streets-v11", // style URL
@@ -36,6 +44,13 @@ function renderMap() {
     visualizePitch: true,
   });
   map.addControl(nav, "bottom-right");
+}
+
+function populateData() {
+  ipAddressDisplay.textContent = data.ip;
+  locationDisplay.textContent = data.location.city;
+  timezoneDisplay.textContent = data.location.timezone;
+  ispDisplay.textContent = data.isp;
 }
 
 getData();
