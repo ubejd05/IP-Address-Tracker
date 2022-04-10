@@ -2,6 +2,7 @@ const ipAddressDisplay = document.querySelector("#ip");
 const locationDisplay = document.querySelector("#location");
 const timezoneDisplay = document.querySelector("#timezone");
 const ispDisplay = document.querySelector("#isp");
+const form = document.getElementsByTagName("form")[0];
 
 
 const IPapiKey = "at_btHIX6OfI49h7StFhthNkCrSTaNA6";
@@ -11,9 +12,9 @@ let data;
 let lng;
 let lat;
 
-async function getData() {
+async function getData(ip) {
   let res = await fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=${IPapiKey}`
+    `https://geo.ipify.org/api/v2/country,city?apiKey=${IPapiKey}&ipAddress=${ip ? ip : ''}`
   );
   data = await res.json();
   lng = data.location.lng;
@@ -54,3 +55,10 @@ function populateData() {
 }
 
 getData();
+
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  getData(e.target.ipAddress.value);
+  e.target.ipAddress.value = "";
+});
