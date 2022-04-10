@@ -19,25 +19,30 @@ body {
 
 #map {
   width: 100vw;
-  height: 80vh;
+  height: 70vh;
 }
 
 #container {
   width: 100%;
-  height: 20vh;
-  background: url("/images/pattern-bg.png");
+  height: 30vh;
+  background-image: url("/images/pattern-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: visible;
 }
 
 h1 {
   color: #fff;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
-#input {
+form {
   width: 500px;
   height: 50px;
   position: relative;
@@ -53,10 +58,10 @@ input {
   background: #fff;
   padding: 10px 20px;
   font-size: 16px;
-  color: var(--dark-gray);
+  color: var(--very-dark-gray);
 }
 
-#input button {
+form button {
   position: absolute;
   top: 0;
   right: 0;
@@ -68,4 +73,63 @@ input {
   border-bottom-right-radius: 12px;
   cursor: pointer;
 }
+
+form button:active {
+  background-color: hsl(0, 0%, 10%);
+}
  
+
+#data {
+  width: 80vw;
+  height: 15vh;
+  background-color: #fff;
+  border-radius: 12px;
+  position: relative;
+  bottom: -80px;
+  z-index: 2;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+}
+
+ul li:not(:last-child) {
+  border-right: 1px solid #ddd;
+  
+}
+
+li {
+  height: 100%;
+  /* background-color: #f1f1ff; */
+  position: relative;
+}
+
+li span {
+  display: block;
+}
+
+li p {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 13px;
+  color: var(--dark-gray);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+li h3 {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
