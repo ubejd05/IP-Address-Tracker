@@ -1,5 +1,6 @@
 const ipAddressDisplay = document.querySelector("#ip");
 const locationDisplay = document.querySelector("#location");
+const regionDisplay = document.querySelector("#region");
 const timezoneDisplay = document.querySelector("#timezone");
 const ispDisplay = document.querySelector("#isp");
 const form = document.getElementsByTagName("form")[0];
@@ -34,9 +35,10 @@ function renderMap() {
   // Create a new marker.
   const marker = new mapboxgl.Marker({
     anchor: "bottom",
+    scale: 2,
   })
     .setLngLat([lng, lat])
-    .setPopup(new mapboxgl.Popup().setText("Hello World!")) // add popup
+    .setPopup(new mapboxgl.Popup().setHTML(`<h3>${data.location.city}</h3>`)) // add popup
     .addTo(map);
 
   const nav = new mapboxgl.NavigationControl({
@@ -49,7 +51,7 @@ function renderMap() {
 
 function populateData() {
   ipAddressDisplay.textContent = data.ip;
-  locationDisplay.textContent = data.location.city;
+  locationDisplay.innerHTML = `${data.location.city},<span id="region">${data.location.region}</span>`;
   timezoneDisplay.textContent = data.location.timezone;
   ispDisplay.textContent = data.isp;
 }
